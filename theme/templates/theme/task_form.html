@@ -1,0 +1,35 @@
+{% extends 'theme/base.html' %} {% block content %}
+<div
+  class="flex justify-between p-8 text-white rounded-tr-md rounded-tl-md bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
+>
+  <a href="{% url 'tasks' %}">&#8592; Back</a>
+</div>
+<div class="p-4 px-8">
+  <form class="space-y-8 grid" action="" method="POST">
+    {% csrf_token %}
+
+    <!-- <div class="">{{form.as_p}}</div> -->
+    <div>
+      <p>{{form.title.label}}:</p>
+      <p>{{form.title}}</p>
+    </div>
+
+    <div class="rounded-md">
+      <p>{{form.description.label}}:</p>
+      <p class="rounded-md">{{form.description}}</p>
+    </div>
+
+    <div>
+      <p>{{form.complete.label}}:</p>
+      <p>{{form.complete}}</p>
+    </div>
+
+    <input
+      class="bg-blue-500 p-2 rounded-md text-white hover:bg-blue-900 hover:scale-105"
+      type="submit"
+      value="Submit"
+    />
+  </form>
+</div>
+
+{% endblock %}

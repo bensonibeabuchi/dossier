@@ -1,0 +1,24 @@
+{% extends 'theme/base.html' %} {% block content %}
+
+<div
+  class="flex justify-between p-8 text-white rounded-tr-md rounded-tl-md bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
+>
+  <h1>Login</h1>
+</div>
+
+<div class="p-4 text-center items-center mx-auto">
+  <form action="" method="POST" class="space-y-8 items-center">
+    {% csrf_token %} {{form.as_p}}
+    <div class="pl-24">
+      <button type="submit">Login</button>
+    </div>
+  </form>
+</div>
+<div class="items-center text-center pl-24 pb-16 pt-8">
+  <p>
+    Dont have an account?
+    <a href="{% url 'register' %}"><span>Register</span></a>
+  </p>
+</div>
+
+{% endblock %}

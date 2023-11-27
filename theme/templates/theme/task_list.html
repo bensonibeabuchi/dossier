@@ -1,0 +1,98 @@
+{% extends 'theme/base.html' %} {% block content %}
+
+<div
+  class="flex justify-between p-8 text-white rounded-tr-md rounded-tl-md bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
+  <div>
+    <h1>Hello {{ request.user|title }}</h1>
+    <h3>You have <i>{{count}}</i> incomplete task{{count|pluralize:"s"}}</h3>
+  </div>
+  <div>
+    {% if request.user.is_authenticated %}
+    <button class="bg-white" type="submit"><a
+      href="{% url 'logout' %}">Logout</a></button>
+    
+    {% else %}
+    <button>
+      <a href="{% url 'login' %}">Login</a>
+    </button>
+    {% endif %}
+  </div>
+</div>
+
+<div class="search-form flex justify-between items-center p-[10px]">
+  <form class=" text-center mx-auto p-2" action="" method="GET">
+    <input class="rounded-md" type="text" name="search-area" id="search-area" value="{{search_input}}" />
+    <button class="bg-blue-500 text-white"  type="submit" value="Search">Search</button>
+  </form>
+  <button>
+    <a class="" href="{% url 'task-create' %}"> Add Task &#x2b</a>
+  </button>
+</div>
+
+<div>
+  {% for task in tasks %}
+  <div class="task-wrapper flex items-center justify-between p-[20px] border-t-2 border-gray-100">
+    {% if task.complete %}
+    <div class="flex">
+      <div class="h-6 w-6 bg-green-300 rounded-full mr-4"></div>
+      <i><s><a href="{% url 'task-update' task.id %}">{{task}}</a></s></i>
+    </div>
+
+    {% else %}
+    <div class="task-title flex">
+      <div class="h-6 w-6 bg-gray-300 rounded-full mr-4"></div>
+      <a href="{% url 'task-update' task.id %}">{{task}}</a>
+    </div>
+
+    {% endif %}
+    <button class="bg-red-500 text-white px-3">
+      <a class="fa fa-trash-o " href="{% url 'task-delete' task.id %}"></a>
+    </button>
+  </div>
+
+  {% empty %}
+  <h3 class="p-4">You dont have any Todo List.</h3>
+
+  {% endfor %}
+</div>
+
+<div>
+  <!-- <button>
+    <a href="{% url 'task-create' %}"> Add Task </a>
+  </button> -->
+
+  <!-- <form class="m-4 text-center mx-auto p-2" action="" method="GET">
+    <input type="text" name="search-area" id="search-area" value="{{search_input}}" />
+    <button class="bg-blue-500" type="submit" value="Search">Search</button>
+  </form> -->
+
+  <!-- <table>
+    <tr>
+      <th class="text-xl font-bold">Item</th>
+      <th></th>
+      <th></th>
+    </tr>
+    {% for task in tasks %}
+    <tr class="border-black border-2 p-4 m-4">
+      <td class="border-black p-4"><a class= p-2 rounded-md text-white hover:bg-blue-900 hover:scale-105"
+        href="{% url 'task' task.id %}">{{task.title }}</a></td>
+      <td class="border-black p-4">{{task.complete }}</td>
+      <td class="p-2">
+        
+      </td>
+      <td class="p-2">
+        <a class="bg-blue-500 p-2 rounded-md text-white hover:bg-blue-900 hover:scale-105"
+          href="{% url 'task-update' task.id %}">Edit</a>
+      </td>
+      <td class="p-2">
+        <a class="bg-blue-500 p-2 rounded-md text-white hover:bg-blue-900 hover:scale-105"
+          href="{% url 'task-delete' task.id %}">Delete</a>
+      </td>
+    </tr>
+    {% empty %}
+    <h3>No items in list</h3>
+    {% endfor %}
+  </table> -->
+</div>
+
+{% endblock %}

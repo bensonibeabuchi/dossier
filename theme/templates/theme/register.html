@@ -1,0 +1,40 @@
+{% extends 'theme/base.html' %} {% block content %}
+
+<div
+  class="flex justify-between p-8 text-white rounded-tr-md rounded-tl-md bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
+>
+  <h1>Register</h1>
+</div>
+
+<div class="p-4 text-center items-center mx-auto">
+  <form action="" method="POST" class="items-center">
+    {% csrf_token %}
+    <!-- {{form.as_p}} -->
+    <div class="space-y-9 pb-8">
+
+      <div>
+        <div>{{form.username.label}}:</div>
+        <div>{{form.username}}</div>
+      </div>
+      <div>
+        <div>{{form.password1.label}}:</div>
+        <div>{{form.password1}}</div>
+      </div>
+      <div>
+        <div>{{form.password2.label}}:</div>
+        <div>{{form.password2}}</div>
+      </div>
+    </div>
+
+    <div class="">
+      <button class="" type="submit">Register</button>
+    </div>
+  </form>
+</div>
+<div class="items-center text-center pb-16 pt-8">
+  <p>
+    Already have an account? <a href="{% url 'login' %}"><span>Login</span></a>
+  </p>
+</div>
+
+{% endblock %}
